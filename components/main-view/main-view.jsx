@@ -3,19 +3,12 @@ import React from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
-import { useState } from "react";
 import { useState, useEffect } from "react";
 
 export const MainView = () => {
     const [books, setBooks] = useState([]);
 
     const [selectedBook, setSelectedBook] = useState(null);
-
-    if (selectedBook) {
-        return(
-            <MovieView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
-        );
-    }
 
     useEffect(() => {
       fetch("https://openlibrary.org/search.json?q=star+wars")
@@ -35,6 +28,12 @@ export const MainView = () => {
         });
     }, []);
   
+    if (selectedBook) {
+      return (
+        <MovieView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
+      );
+    }
+
     if (books.length === 0) {
       return <div>The list is empty!</div>;
     }

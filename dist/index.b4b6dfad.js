@@ -27177,14 +27177,6 @@ const MainView = ()=>{
     _s();
     const [books, setBooks] = (0, _react.useState)([]);
     const [selectedBook, setSelectedBook] = (0, _react.useState)(null);
-    if (selectedBook) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        book: selectedBook,
-        onBackClick: ()=>setSelectedBook(null)
-    }, void 0, false, {
-        fileName: "components/main-view/main-view.jsx",
-        lineNumber: 16,
-        columnNumber: 13
-    }, undefined);
     (0, _react.useEffect)(()=>{
         fetch("https://openlibrary.org/search.json?q=star+wars").then((response)=>response.json()).then((data)=>{
             const booksFromApi = data.docs.map((doc)=>{
@@ -27198,11 +27190,19 @@ const MainView = ()=>{
             setBooks(booksFromApi);
         });
     }, []);
+    if (selectedBook) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+        book: selectedBook,
+        onBackClick: ()=>setSelectedBook(null)
+    }, void 0, false, {
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 33,
+        columnNumber: 9
+    }, undefined);
     if (books.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 39,
+        lineNumber: 38,
         columnNumber: 14
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27213,12 +27213,12 @@ const MainView = ()=>{
                 }
             }, book.id, false, {
                 fileName: "components/main-view/main-view.jsx",
-                lineNumber: 45,
+                lineNumber: 44,
                 columnNumber: 13
             }, undefined))
     }, void 0, false, {
         fileName: "components/main-view/main-view.jsx",
-        lineNumber: 43,
+        lineNumber: 42,
         columnNumber: 9
     }, undefined);
 };
@@ -27260,7 +27260,9 @@ const MovieCard = ({ book, onBookClick })=>{
 _c = MovieCard;
 MovieCard.propTypes = {
     book: (0, _propTypesDefault.default).shape({
-        title: (0, _propTypesDefault.default).string
+        title: (0, _propTypesDefault.default).string.isRequired,
+        image: (0, _propTypesDefault.default).string.isRequired,
+        author: (0, _propTypesDefault.default).string
     }).isRequired,
     onBookClick: (0, _propTypesDefault.default).func.isRequired
 };

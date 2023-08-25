@@ -2,13 +2,20 @@ import React from "react";
 
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
 
 import { useState, useEffect } from "react";
 
 export const MainView = () => {
     const [books, setBooks] = useState([]);
-
     const [selectedBook, setSelectedBook] = useState(null);
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [user, setUser] = useState(storedUser? storedUser : null);
+    const [token, setToken] = useState(storedToken? storedToken : null);
+    const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
       fetch("https://openlibrary.org/search.json?q=star+wars")
@@ -28,6 +35,32 @@ export const MainView = () => {
         });
     }, []);
   
+    if (!user) {
+      return (
+        <>
+          <LoginView onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }} />
+          or
+          <SignupView />
+        </>
+      );
+    }
+
+    useEffect(() => {
+      if (!token) return;
+
+      fetch("..../movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((response) => response.json())
+        .then((movies) => {
+          setMovies(movies);
+   
+        });
+    }, [token]);
+
     if (selectedBook) {
       return (
         <MovieView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
@@ -49,7 +82,7 @@ export const MainView = () => {
             }}
         />
           ))}
-        </div>
+<button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>        </div>
       );
   };
 

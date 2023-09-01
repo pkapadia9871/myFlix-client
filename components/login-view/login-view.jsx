@@ -17,7 +17,7 @@ export const LoginView = ({ onLoggedIn }) => {
       secret: password
     };
 
-    fetch("https://movie-api-seven-omega.vercel.app/login", {
+    fetch("https://movieapi-or4e.onrender.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

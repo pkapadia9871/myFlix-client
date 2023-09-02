@@ -47206,7 +47206,7 @@ const handleSubmit = (event)=>{
         Email: email,
         Birthday: birthday
     };
-    fetch("SIGNUP_URL", {
+    fetch("https://movieapi-or4e.onrender.com/users", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

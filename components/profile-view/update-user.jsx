@@ -1,6 +1,8 @@
 import React from "react"
 
-function UpdatedUser({handleSubmit, handleUpdate})
+import axios from 'axios';
+
+function UpdateUser({handleSubmit, handleUpdate})
 {
 
     const deleteUser = (id) => {

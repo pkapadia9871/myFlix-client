@@ -4,6 +4,8 @@ import axios from 'axios'
 
 function FavoriteMovies ({favoriteMovieList}) {
 
+    /*const favoriteMovieList = movies.filter(m => user.FavoriteMovies.includes(m._id))*/
+
     const addFav = (id) => {
         let token = localStorage.getItem('token');
         let url = `https://movieapi-or4e.onrender.com/users/${localStorage.getItem('user')}/movies/${id}`;

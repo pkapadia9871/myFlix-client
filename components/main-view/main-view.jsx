@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = () => {
     const [books, setBooks] = useState([]);
@@ -118,6 +119,31 @@ export const MainView = () => {
                   )}
                 </>
               }
+            />
+            <Route 
+              path='/user/profile'
+              element={
+                <>
+                {!user ? (
+                  <Navigate to='/login' replace />
+                ) : (
+                  <Col md={5}>
+                    <ProfileView
+                      movies={movies}
+                      user={user}
+                      token={token}
+                      syncUser={syncUser}
+                      onLogout={() => {
+                        setUser(null);
+                        setToken(null);
+                        localStorage.clear();
+
+                      }}
+                      />
+                  </Col>
+                )}
+                </>
+              } 
             />
           </Routes>
         </Row>

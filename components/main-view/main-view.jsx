@@ -15,30 +15,28 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = () => {
-    const [books, setBooks] = useState([]);
-    const [selectedBook, setSelectedBook] = useState(null);
+    const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken : null);
-    const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
 
     useEffect(() => {
-      fetch("https://openlibrary.org/search.json?q=star+wars")
+      fetch("https://movieapi-or4e.onrender.com/movies")
         .then((response) => response.json())
         .then((data) => {
-          const booksFromApi = data.docs.map((doc) => {
+          const moviesFromApi = data.map((doc) => {
             return {
-              id: doc.key,
+              /*id: doc.key,*/
               title: doc.title,
-              image:
+              /*image:
   `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
-              author: doc.author_name?.[0]
+              author: doc.author_name?.[0]*/
             };
           });
 
-          setBooks(booksFromApi);
+          setMovies(moviesFromApi);
         });
     }, []);
 
@@ -85,16 +83,16 @@ export const MainView = () => {
               }
             />
             <Route
-              path="/books/:bookId"
+              path="/movies/:movieID"
               element={
                 <>
                   {!user ? (
                     <Navigate to="/login" replace />
-                  ) : books.length === 0 ? (
+                  ) : movies.length === 0 ? (
                     <Col>The list is empty!</Col>
                   ) : (
                     <Col md={8}>
-                      <MovieView books={books} />
+                      <MovieView movies={movies} />
                     </Col>
                   )}
                 </>
@@ -106,13 +104,13 @@ export const MainView = () => {
                 <>
                   {!user ? (
                     <Navigate to="/login" replace />
-                  ) : books.length === 0 ? (
+                  ) : movies.length === 0 ? (
                     <Col>The list is empty!</Col>
                   ) : (
                     <>
-                      {books.map((book) => (
-                        <Col className="mb-4" key={book.id} md={3}>
-                          <MovieCard book={book} />
+                      {movies.map((movie) => (
+                        <Col className="mb-4" key={movie.id} md={3}>
+                          <MovieCard movie={movie} />
                         </Col>
                       ))}
                     </>
@@ -129,7 +127,7 @@ export const MainView = () => {
                 ) : (
                   <Col md={5}>
                     <ProfileView
-                      movies={books}
+                      movies={movies}
                       onUpdateUserInfo={(user) => setUser(user)}
                       />
                   </Col>

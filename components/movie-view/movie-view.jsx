@@ -2,23 +2,16 @@ import "./movie-view.scss";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
-export const MovieView = ({ books }) => {
-  const { bookId } = useParams();
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
 
-  const book = books.find((b) => b.id === bookId);
+  const movie = movies.find((b) => b.id === movieId);
 
   return (
     <div>
       <div>
-        <img className="w-100" src={book.image} />
-      </div>
-      <div>
         <span>Title: </span>
-        <span>{book.title}</span>
-      </div>
-      <div>
-        <span>Author: </span>
-        <span>{book.author}</span>
+        <span>{movie.title}</span>
       </div>
       <Link to={`/`}>
         <button className="back-button">Back</button>

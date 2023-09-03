@@ -37,11 +37,11 @@ export const MainView = () => {
               author: doc.author_name?.[0]
             };
           });
-  
+
           setBooks(booksFromApi);
         });
     }, []);
-  
+
     return (
       <BrowserRouter>
         <NavigationBar
@@ -66,7 +66,7 @@ export const MainView = () => {
                     </Col>
                   )}
                 </>
-  
+
               }
             />
             <Route
@@ -81,7 +81,7 @@ export const MainView = () => {
                     </Col>
                   )}
                 </>
-  
+
               }
             />
             <Route
@@ -120,8 +120,8 @@ export const MainView = () => {
                 </>
               }
             />
-            <Route 
-              path='/user/profile'
+            <Route
+              path='/profile/:username'
               element={
                 <>
                 {!user ? (
@@ -129,21 +129,13 @@ export const MainView = () => {
                 ) : (
                   <Col md={5}>
                     <ProfileView
-                      movies={movies}
-                      user={user}
-                      token={token}
-                      syncUser={syncUser}
-                      onLogout={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-
-                      }}
+                      movies={books}
+                      onUpdateUserInfo={(user) => setUser(user)}
                       />
                   </Col>
                 )}
                 </>
-              } 
+              }
             />
           </Routes>
         </Row>

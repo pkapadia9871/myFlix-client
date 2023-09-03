@@ -1,45 +1,34 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React from "react";
+import { Link } from "react-router-dom";
 
-function FavoriteMovies ({favoriteMovieList}) {
-
-    /*const favoriteMovieList = movies.filter(m => user.FavoriteMovies.includes(m._id))*/
-
-    const addFav = (id) => {
-        let token = localStorage.getItem('token');
-        let url = `https://movieapi-or4e.onrender.com/users/${localStorage.getItem('user')}/movies/${id}`;
-        axios.post(url, {
-            headers: {Authorization: `Bearer ${token}`},
-        })
-    }
-
-    const removeFav = (id) => {
-        let token = localStorage.getItem('token');
-        let url = `https://movieapi-or4e.onrender.com/users/${localStorage.getItem('user')}/movies/${id}`;
-        axios.delete(url, {
-            headers: {Authorization: `Bearer ${token}`},
-        })
-    }
-
-    return (
-        <div>
-            <h4>Favorite Movies</h4>
-            {favoriteMovieList.map((movies) => {
-                return (
-                    <div key={movies._id}>
-                        <img src={movies.ImagePath}/>
-                        <Link to={`/movies/$movies._id`}>
-                            <h4>{movies.Title}</h4>
-                        </Link>
-                        <button variant="secondary" onClick={()=>addFav(movies.id)}>Add to list</button>
-                        <button variant="secondary" onClick={()=>removeFav(movies.id)}>Remove from list</button>
-                    </div>
-                )
-            })
-            }
-        </div>
-    )
+function FavoriteMovies({ favoriteMovieList, removeFav }) {
+  return (
+    <div>
+      <h4>Favorite Movies</h4>
+      {favoriteMovieList.length === 0 ? (
+        <span>The list is empty!</span>
+      ) : (
+        <>
+          {favoriteMovieList.map((movie) => {
+            return (
+              <div key={movie._id}>
+                <img src={movie.ImagePath} />
+                <Link to={`/movies/${movie._id}`}>
+                  <h4>{movie.Title}</h4>
+                </Link>
+                <button
+                  variant="secondary"
+                  onClick={() => removeFav(movie._id)}
+                >
+                  Remove from list
+                </button>
+              </div>
+            );
+          })}
+        </>
+      )}
+    </div>
+  );
 }
 
-export default FavoriteMovies
+export default FavoriteMovies;

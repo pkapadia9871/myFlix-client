@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function FavoriteMovies({ favoriteMovieList, removeFav }) {
+function FavoriteMovies({ favoriteMovieList }) {
+
   return (
     <div>
       <h4>Favorite Movies</h4>
@@ -12,16 +13,9 @@ function FavoriteMovies({ favoriteMovieList, removeFav }) {
           {favoriteMovieList.map((movie) => {
             return (
               <div key={movie._id}>
-                <img src={movie.ImagePath} />
                 <Link to={`/movies/${movie._id}`}>
-                  <h4>{movie.Title}</h4>
+                  <h4>{movie.title}</h4>
                 </Link>
-                <button
-                  variant="secondary"
-                  onClick={() => removeFav(movie._id)}
-                >
-                  Remove from list
-                </button>
               </div>
             );
           })}

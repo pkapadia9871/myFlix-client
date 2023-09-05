@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import UserInfo from "./user-info";
 import FavoriteMovies from "./favorite-movies";
 import UpdateUser from "./update-user";
+import axios from "axios";
 
 export function ProfileView({ movies, onUpdateUserInfo }) {
   const { username } = useParams();
@@ -63,16 +64,6 @@ export function ProfileView({ movies, onUpdateUserInfo }) {
       });
   };
 
-  const removeFav = (id) => {
-    const token = localStorage.getItem("token");
-
-    let url = `https://movieapi-or4e.onrender.com/users/${user.Username}/movies/${id}`;
-
-    axios.delete(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  };
-
   const handleUpdate = (e) => {
     const { name, value } = e.target;
 
@@ -100,7 +91,6 @@ export function ProfileView({ movies, onUpdateUserInfo }) {
       <UserInfo name={user.Username} email={user.Email} />
       <FavoriteMovies
         favoriteMovieList={favoriteMovieList}
-        removeFav={removeFav}
       />
       <UpdateUser
         user={user}

@@ -28,11 +28,8 @@ export const MainView = () => {
         .then((data) => {
           const moviesFromApi = data.map((doc) => {
             return {
-              /*id: doc.key,*/
-              title: doc.title,
-              /*image:
-  `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
-              author: doc.author_name?.[0]*/
+              id: doc._id,
+              title: doc.Title,
             };
           });
 
@@ -83,7 +80,7 @@ export const MainView = () => {
               }
             />
             <Route
-              path="/movies/:movieID"
+              path="/movies/:MovieID"
               element={
                 <>
                   {!user ? (
@@ -110,7 +107,7 @@ export const MainView = () => {
                     <>
                       {movies.map((movie) => (
                         <Col className="mb-4" key={movie.id} md={3}>
-                          <MovieCard movie={movie} />
+                          <MovieCard movie={movie}/>
                         </Col>
                       ))}
                     </>

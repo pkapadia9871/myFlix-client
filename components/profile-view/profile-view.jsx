@@ -16,14 +16,12 @@ export function ProfileView({ movies, onUpdateUserInfo }) {
     Birthday: "",
   });
 
-  const favoriteMovieList = movies.filter((movies) =>
-    user.FavoriteMovies.includes(movies._id)
-  );
+  let favoriteMovieList = movies.filter((movie) => user.FavoriteMovies.includes(movie.id));
 
-  const getUser = () => {
+  const getUser = async () => {
     const token = localStorage.getItem("token");
 
-    fetch("https://movieapi-or4e.onrender.com/users", {
+    await fetch("https://movieapi-or4e.onrender.com/users", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

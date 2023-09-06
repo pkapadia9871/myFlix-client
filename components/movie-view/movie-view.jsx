@@ -16,8 +16,11 @@ export const MovieView = ({ movies }) => {
   
       let url = `https://movieapi-or4e.onrender.com/users/${username}/movies/${movie.id}`;
   
-      axios.post(url, {
+      axios.post(url, null, {
         headers: {  Authorization: `Bearer ${token}` },
+      }).then(({data}) => {
+        localStorage.setItem("user", JSON.stringify(data));
+        alert('movie added');
       });
 
     };
@@ -28,8 +31,12 @@ export const MovieView = ({ movies }) => {
       let url = `https://movieapi-or4e.onrender.com/users/${username}/movies/${movie.id}`;
   
       axios.delete(url, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {  Authorization: `Bearer ${token}` },
+      }).then(({data}) => {
+        localStorage.setItem("user", JSON.stringify(data));
+        alert('movie deleted');
       });
+
     };
 
     /*END CODE HERE*/

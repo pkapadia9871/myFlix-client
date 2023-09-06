@@ -12,8 +12,8 @@ function FavoriteMovies({ favoriteMovieList }) {
         <>
           {favoriteMovieList.map((movie) => {
             return (
-              <div key={movie._id}>
-                <Link to={`/movies/${movie._id}`}>
+              <div key={movie.id}>
+                <Link to={`/movies/${movie.id}`}>
                   <h4>{movie.title}</h4>
                 </Link>
               </div>

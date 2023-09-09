@@ -32,8 +32,7 @@ export const MovieView = ({ movies }) => {
   
       axios.delete(url, {
         headers: {  Authorization: `Bearer ${token}` },
-      }).then(({data}) => {
-        localStorage.setItem("user", JSON.stringify(data));
+      }).then(() => {
         alert('movie deleted');
       });
 

@@ -8,7 +8,7 @@ export const MovieView = ({ movies }) => {
 
   const movie = movies.find((movie) => movie.id === MovieID);
 
-  username = JSON.parse(localStorage.getItem('user')).Username
+  const username = JSON.parse(localStorage.getItem('user')).Username
 
   /*START CODE HERE*/
     const addFav = () => {
@@ -21,7 +21,9 @@ export const MovieView = ({ movies }) => {
       }).then(({data}) => {
         localStorage.setItem("user", JSON.stringify(data));
         alert('movie added');
-      });
+      }).catch(error => {
+        console.log('error')
+     });
 
     };
 
@@ -34,7 +36,9 @@ export const MovieView = ({ movies }) => {
         headers: {  Authorization: `Bearer ${token}` },
       }).then(() => {
         alert('movie deleted');
-      });
+      }).catch(error => {
+        console.log('error')
+     });
 
     };
 

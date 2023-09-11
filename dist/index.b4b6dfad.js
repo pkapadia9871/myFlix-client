@@ -51187,7 +51187,7 @@ const MovieView = ({ movies })=>{
     _s();
     const { MovieID } = (0, _reactRouter.useParams)();
     const movie = movies.find((movie)=>movie.id === MovieID);
-    username = JSON.parse(localStorage.getItem("user")).Username;
+    const username = JSON.parse(localStorage.getItem("user")).Username;
     /*START CODE HERE*/ const addFav = ()=>{
         const token = localStorage.getItem("token");
         let url = `https://movieapi-or4e.onrender.com/users/${username}/movies/${movie.id}`;
@@ -51198,6 +51198,8 @@ const MovieView = ({ movies })=>{
         }).then(({ data })=>{
             localStorage.setItem("user", JSON.stringify(data));
             alert("movie added");
+        }).catch((error)=>{
+            console.log("error");
         });
     };
     const removeFav = ()=>{
@@ -51209,6 +51211,8 @@ const MovieView = ({ movies })=>{
             }
         }).then(()=>{
             alert("movie deleted");
+        }).catch((error)=>{
+            console.log("error");
         });
     };
     /*END CODE HERE*/ return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -51219,20 +51223,20 @@ const MovieView = ({ movies })=>{
                         children: "Title: "
                     }, void 0, false, {
                         fileName: "components/movie-view/movie-view.jsx",
-                        lineNumber: 46,
+                        lineNumber: 50,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         children: movie.title
                     }, void 0, false, {
                         fileName: "components/movie-view/movie-view.jsx",
-                        lineNumber: 47,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/movie-view/movie-view.jsx",
-                lineNumber: 45,
+                lineNumber: 49,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -51243,7 +51247,7 @@ const MovieView = ({ movies })=>{
                         children: "Add to favorites"
                     }, void 0, false, {
                         fileName: "components/movie-view/movie-view.jsx",
-                        lineNumber: 50,
+                        lineNumber: 54,
                         columnNumber: 7
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -51252,13 +51256,13 @@ const MovieView = ({ movies })=>{
                         children: "Remove from list"
                     }, void 0, false, {
                         fileName: "components/movie-view/movie-view.jsx",
-                        lineNumber: 51,
+                        lineNumber: 55,
                         columnNumber: 7
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/movie-view/movie-view.jsx",
-                lineNumber: 49,
+                lineNumber: 53,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -51268,18 +51272,18 @@ const MovieView = ({ movies })=>{
                     children: "Back"
                 }, void 0, false, {
                     fileName: "components/movie-view/movie-view.jsx",
-                    lineNumber: 54,
+                    lineNumber: 58,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "components/movie-view/movie-view.jsx",
-                lineNumber: 53,
+                lineNumber: 57,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/movie-view/movie-view.jsx",
-        lineNumber: 44,
+        lineNumber: 48,
         columnNumber: 5
     }, undefined);
 };

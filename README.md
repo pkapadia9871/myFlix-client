@@ -1,3 +1,3 @@
 # myFlix-client
 
-Client-side front end for users to browse movies and favorite them. More progress to come. Technologies used: React.js
+Client-side front end for users to browse movies and favorite them. More progress to come. Technologies used: React.js. The features of this app include: Login and signup views for a user to sign up and log in after doing the former. A movie view for showing the characteristics of the movie selected and allowing the user to add or remove it to their list of favorites. A main page for showing a list of movies available on the site. A profile view that shows the data of the user such as their name and email, allows them to update their info, and delete their account. The front end allows a user to get, post and delete data from the API that powers the backend on the app.

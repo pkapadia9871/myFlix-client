@@ -9,12 +9,17 @@ import "./index.scss";
 
 import Container from 'react-bootstrap/Container';
 
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
   return (
+    <Provider store={store}>
     <Container style={{border: "1px solid red"}}>
       <MainView />
     </Container>
+    </Provider>
   );
 };
 

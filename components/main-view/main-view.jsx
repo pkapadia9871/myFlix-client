@@ -21,6 +21,7 @@ export const MainView = () => {
     const storedToken = localStorage.getItem("token");
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken : null);
+    const [movieFiltering, setMovieFiltering] = useState([]);
 
     useEffect(() => {
       fetch("https://movieapi-or4e.onrender.com/movies")
@@ -37,6 +38,18 @@ export const MainView = () => {
         });
     }, []);
 
+    useEffect(() => {
+      setMovieFiltering(movies);
+    }, [movies]);
+
+    const doSearch = (word) => {
+      const searchMovie = word.target.value.toLowerCase();
+      const someMovies = movies.filter((movie) =>
+        movie.title.toLowerCase().includes(searchMovie)
+      );
+      setMovieFiltering(someMovies);
+    };
+
     return (
       <BrowserRouter>
         <NavigationBar
@@ -46,6 +59,7 @@ export const MainView = () => {
               setToken(token);
               localStorage.clear();
             }}
+            doSearch={doSearch}
             />
         <Row className="justify-content-md-center">
           <Routes>
@@ -105,7 +119,7 @@ export const MainView = () => {
                     <Col>The list is empty!</Col>
                   ) : (
                     <>
-                      {movies.map((movie) => (
+                      {movieFiltering.map((movie) => (
                         <Col className="mb-4" key={movie.id} md={3}>
                           <MovieCard movie={movie}/>
                         </Col>
